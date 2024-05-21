@@ -33,8 +33,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Test code
+        id: run-tests
         run: npm run test
       - name: Upload test report
+        ## this step only runs if the run-test step (id) failed
+        ## for this to work we need to also add the failure() function, other 3 to note: success(), always(), cancelled()
+        if: failure() && steps.run-tests.outcome == 'failure' 
         uses: actions/upload-artifact@v3
         with:
           name: test-report
