@@ -8,7 +8,7 @@ on:
                         ## set to true, the value is needed
         default: dist   ## if we didnt get any value, the default value is used
         type: string
-    ouputs: 
+    outputs: 
       result: 
         description: the result of the deployment opertion
         value: ${{ jobs.deploy.outputs.outcome }}
