@@ -4,8 +4,14 @@ jobs:
   build: 
     strategy:
       matrix:
-        node-version: [14,16,18]
-        os: [ubuntu-latest, windows-latest]
+        node-version: [14,16,18] ## The key name here is not reserved so you can name it whatever
+        os: [ubuntu-latest, windows-latest] ## The key name here is not reserved so you can name it whatever
+        include: ## this key is reserved by GHA, means the combination below is included in the workflow
+          - node-version: 20
+            os: ubuntu-latest
+        exclude: ## this key is reserved by GHA, means the combination below is excluded in the workflow
+          - node-version: 14
+            os: windows-latest
     runs-on: ${{ matrix.os }}
     steps:
       - name: Get code
