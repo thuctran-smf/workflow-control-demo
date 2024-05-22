@@ -8,8 +8,18 @@ on:
                         ## set to true, the value is needed
         default: dist   ## if we didnt get any value, the default value is used
         type: string
+    ouputs: 
+      result: 
+        description: the result of the deployment opertion
+        value: ${{ jobs.deploy.outputs.outcome }}
+    #secrets:
+      #some-secrets:
+        #required: false
 jobs:
   deploy:
+    outputs:
+      outcome: ${{ steps.set-result.outputs.step-result }}
+
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -22,3 +32,7 @@ jobs:
         run: ls
       - name: Output information
         run: echo "Deploying and Uploading..."
+      - name: Set result output
+        id: set-result
+        run: echo "step-result=sucess" >> $GITHUB_OUPUT
+        ## String sucess will be stored on the step-result
