@@ -3,7 +3,7 @@ on: push
 jobs: 
   build: 
     strategy:
-      matrix:
+      matrix: ## Used to control which version of a job is being executed and to use multiple config
         node-version: [14,16,18] ## The key name here is not reserved so you can name it whatever
         os: [ubuntu-latest, windows-latest] ## The key name here is not reserved so you can name it whatever
         include: ## this key is reserved by GHA, means the combination below is included in the workflow
